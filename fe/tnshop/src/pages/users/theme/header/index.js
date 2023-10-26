@@ -1,7 +1,13 @@
 import { Link } from 'react-router-dom'
 import {memo, useState} from "react";
 import"./style.scss";
-import { AiOutlineFacebook,  AiOutlineInstagram, AiOutlineMail, AiOutlineUser, AiOutlineShoppingCart } from "react-icons/ai";
+import { 
+    AiOutlineFacebook,  
+    AiOutlineInstagram, 
+    AiOutlineMail, 
+    AiOutlineUser, 
+    AiOutlineShoppingCart 
+} from "react-icons/ai";
 import { formatter } from 'utils/fomater';
 import {ROUTERS} from "utils/router"
 
@@ -90,6 +96,19 @@ const Header = () => {
                                     menus?.map((menu, menuKey) => (
                                         <li key={menuKey} className={menuKey === 0 ? "active" : ""}>
                                             <Link to={menu?.path}> {menu?.name}</Link>
+                                            {
+                                                menu.child && (
+                                                    <ul className="header_menu_dropdown">
+                                                        {
+                                                            menu.child.map((childItem, childKey) => (
+                                                                <li key={`${menuKey}-${childKey}`}>
+                                                                    <Link to={childItem.path}> {childItem.name}  </Link>
+                                                                </li>
+                                                            ))}
+                                                        
+                                                    </ul>
+                                                )
+                                            }
                                         </li>
                                     ))}
                             </ul>
